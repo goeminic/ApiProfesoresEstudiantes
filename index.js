@@ -20,3 +20,5 @@ app.use("/cursos",cursosRoutes);
 app.listen(6500, ()=>{
     console.log('Servidor Activo'); 
 });
+
+/* para actualizar 1 git commit -m "comentarios" 2 git add .*/

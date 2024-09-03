@@ -20,7 +20,7 @@ class EstudiantesController {
     }
 
     consultarDetalle(req,res) { 
-        const { id } = req.params;
+        const { id } = req.params; /*obtengo el id del parametro enviado por http*/
         try{
             db.query(`SELECT * FROM estudiantes WHERE id = ?`, [id],
                 (err,rows) => {
@@ -50,9 +50,23 @@ class EstudiantesController {
             res.status(500).send(err.message);
         }
     }
-    /*quede en 1:08:00*/
+    /*quede en 1:11:00*/
     actualizar(req,res) {
-        res.json({msg:'Actualizacion de estudiante desde clase'});
+        const { id } = req.params;/*obtengo el id del parametro enviado por http*/
+        try{
+            const {dni, nombre, apellido, email} = req.body; /*obtengo los datos nuevo que se desean ingresar del body del http*/
+            db.query(`UPDATE estudiantes 
+            SET dni = ?, nombre = ?, apellido = ?, email = ?
+            WHERE id = ?;`,
+                [dni, nombre, apellido, email, id], (err,rows) =>{
+                    if (err){
+                        res.status(400).send(err);
+                    }
+                    res.status(201).json(rows);
+                });
+        }catch(err){
+            res.status(500).send(err.message);
+        }
     }
 
     borrar(req,res) {

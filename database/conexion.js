@@ -17,6 +17,5 @@ db.connect((err) => {
 });
 
 
-/* quede en 53 */
 
 module.exports = db;
