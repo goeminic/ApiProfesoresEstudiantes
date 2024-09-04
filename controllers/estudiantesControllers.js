@@ -50,7 +50,7 @@ class EstudiantesController {
             res.status(500).send(err.message);
         }
     }
-    /*quede en 1:11:00*/
+    /*quede en 1:15:00*/
     actualizar(req,res) {
         const { id } = req.params;/*obtengo el id del parametro enviado por http*/
         try{
@@ -62,7 +62,9 @@ class EstudiantesController {
                     if (err){
                         res.status(400).send(err);
                     }
-                    res.status(201).json(rows);
+                    if(rows.affectedRows == 1){
+                        res.status(200).json({ msg: 'Registro actualizado con Exito'});
+                    }
                 });
         }catch(err){
             res.status(500).send(err.message);
@@ -70,7 +72,19 @@ class EstudiantesController {
     }
 
     borrar(req,res) {
-        res.json({msg:'Eliminacion de estudiante desde clase'});
+        const { id } = req.params;
+        try{
+            db.query(`DELETE FROM estudiantes WHERE id = ?;`, [id], (err,rows) => {
+                if(err){
+                    res.status(400).send(err);
+                }
+                if(rows.affectedRows == 1){
+                    res.status(200).json({msg:'Registro eliminado con exito'});
+                }
+            });
+        }catch(err){
+            res.status(500).send(err.message);
+        }        
     }
     
 }
