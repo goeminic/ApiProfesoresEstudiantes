@@ -33,7 +33,7 @@ class EstudiantesController {
             res.status(500).send(err.message);
         }
     }
-
+    
     ingresar(req,res) {
         try{
             const {dni, nombre, apellido, email} = req.body;  /* En esta linea se realiza una desestructuracion del contenido que envia req.body para poder obtener los datos cargados por el usuario alli mismo y luego poder utilizarlos en la insercion*/
@@ -43,14 +43,15 @@ class EstudiantesController {
                 [dni, nombre, apellido, email],(err, rows) => {
                     if (err){
                         res.status(400).send(err);
-                }
-                res.status(201).json({ id: rows.insertId });
+                    }else{
+                        res.status(201).json({ id: rows.insertId });
+                    }                
                 });
         } catch(err) {
             res.status(500).send(err.message);
         }
     }
-    /*quede en 1:15:00*/
+    /*quede en 1:33:00*/
     actualizar(req,res) {
         const { id } = req.params;/*obtengo el id del parametro enviado por http*/
         try{
