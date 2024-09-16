@@ -51,7 +51,7 @@ class EstudiantesController {
             res.status(500).send(err.message);
         }
     }
-    /*quede en 1:33:00*/
+    
     actualizar(req,res) {
         const { id } = req.params;/*obtengo el id del parametro enviado por http*/
         try{
