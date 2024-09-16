@@ -6,7 +6,7 @@ router.get('/',cursosController.consultar);
 
 router.post('/',cursosController.ingresar);
 
-router.post('/registrarEstudiante',cursosController.asociarEstudiante);
+router.post('/registrarEstudiante',cursosController.asociarEstudiante); 
 
 router.route("/:id")
     .get(cursosController.consultarDetalle)
